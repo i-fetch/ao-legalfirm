@@ -12,6 +12,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu'
+import { cn } from '@/lib/utils'
 
 interface NavbarProps {
   onConsultationClick: () => void
@@ -20,135 +21,95 @@ interface NavbarProps {
 export function Navbar({ onConsultationClick }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const { theme, setTheme } = useTheme()
 
   useEffect(() => {
     setMounted(true)
+
+    const onScroll = () => {
+      setScrolled(window.scrollY > 10)
+    }
+
+    window.addEventListener('scroll', onScroll)
+    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  const toggleTheme = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark')
+  }
+
   return (
-    <nav className="sticky top-0 z-40 bg-background/98 backdrop-blur-sm border-b border-border/30">
+    <nav
+      className={cn(
+        'sticky top-0 z-50 transition-all duration-300',
+        scrolled
+          ? 'bg-background/90 backdrop-blur-md shadow-sm border-b border-border/40'
+          : 'bg-background'
+      )}
+    >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
-          <Link href="/" className="text-xl font-serif font-bold text-primary tracking-tight">
+        <div className="flex h-20 items-center justify-between">
+          {/* Logo */}
+          <Link
+            href="/"
+            className="text-xl font-serif font-bold tracking-tight text-primary"
+          >
             AO LEGAL
           </Link>
 
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-2">
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-4">
             <NavigationMenu>
-              <NavigationMenuList>
-                <NavigationMenuItem>
-                  <Link href="/" className="text-sm font-light text-foreground/70 hover:text-primary transition-colors px-3 py-2">
-                    Home
-                  </Link>
-                </NavigationMenuItem>
+              <NavigationMenuList className="gap-1">
+                <NavLink href="/">Home</NavLink>
 
-                {/* About Dropdown */}
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger className="text-sm font-light text-foreground/70 hover:text-primary">
-                    About
-                  </NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <div className="w-48 p-4 space-y-2">
-                      <Link href="/about/mission" className="block text-sm text-foreground/70 hover:text-primary py-2">
-                        Our Mission & Vision
-                      </Link>
-                      <Link href="/about/history" className="block text-sm text-foreground/70 hover:text-primary py-2">
-                        History & Values
-                      </Link>
-                      <Link href="/team" className="block text-sm text-foreground/70 hover:text-primary py-2">
-                        Leadership Team
-                      </Link>
-                    </div>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
+                <NavDropdown label="About">
+                  <NavItem href="/about/mission">Mission & Vision</NavItem>
+                  <NavItem href="/about/history">History & Values</NavItem>
+                  <NavItem href="/team">Leadership Team</NavItem>
+                </NavDropdown>
 
-                {/* Practice Areas Dropdown */}
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger className="text-sm font-light text-foreground/70 hover:text-primary">
-                    Practice Areas
-                  </NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <div className="w-56 p-4 space-y-2">
-                      <Link href="/practice/corporate" className="block text-sm text-foreground/70 hover:text-primary py-2">
-                        Corporate & Commercial Law
-                      </Link>
-                      <Link href="/practice/real-estate" className="block text-sm text-foreground/70 hover:text-primary py-2">
-                        Real Estate & Property Law
-                      </Link>
-                      <Link href="/practice/litigation" className="block text-sm text-foreground/70 hover:text-primary py-2">
-                        Litigation & Dispute Resolution
-                      </Link>
-                      <Link href="/practice/advisory" className="block text-sm text-foreground/70 hover:text-primary py-2">
-                        Legal Advisory & Secretarial
-                      </Link>
-                    </div>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
+                <NavDropdown label="Practice Areas" wide>
+                  <NavItem href="/practice/corporate">
+                    Corporate & Commercial Law
+                  </NavItem>
+                  <NavItem href="/practice/real-estate">
+                    Real Estate & Property Law
+                  </NavItem>
+                  <NavItem href="/practice/litigation">
+                    Litigation & Dispute Resolution
+                  </NavItem>
+                  <NavItem href="/practice/advisory">
+                    Legal Advisory & Secretarial
+                  </NavItem>
+                </NavDropdown>
 
-                {/* Our People Dropdown */}
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger className="text-sm font-light text-foreground/70 hover:text-primary">
-                    Our People
-                  </NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <div className="w-48 p-4 space-y-2">
-                      <Link href="/team#partners" className="block text-sm text-foreground/70 hover:text-primary py-2">
-                        Partners
-                      </Link>
-                      <Link href="/team#associates" className="block text-sm text-foreground/70 hover:text-primary py-2">
-                        Associates
-                      </Link>
-                      <Link href="/team#counsel" className="block text-sm text-foreground/70 hover:text-primary py-2">
-                        Counsel
-                      </Link>
-                    </div>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
+                <NavDropdown label="Resources">
+                  <NavItem href="/resources/blog">Blog & Insights</NavItem>
+                  <NavItem href="/resources/publications">
+                    Legal Publications
+                  </NavItem>
+                  <NavItem href="/resources/case-studies">
+                    Case Studies
+                  </NavItem>
+                </NavDropdown>
 
-                {/* Resources Dropdown */}
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger className="text-sm font-light text-foreground/70 hover:text-primary">
-                    Resources
-                  </NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <div className="w-48 p-4 space-y-2">
-                      <Link href="/resources/blog" className="block text-sm text-foreground/70 hover:text-primary py-2">
-                        Blog & Insights
-                      </Link>
-                      <Link href="/resources/publications" className="block text-sm text-foreground/70 hover:text-primary py-2">
-                        Legal Publications
-                      </Link>
-                      <Link href="/resources/case-studies" className="block text-sm text-foreground/70 hover:text-primary py-2">
-                        Case Studies
-                      </Link>
-                    </div>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-
-                {/* Contact Dropdown */}
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger className="text-sm font-light text-foreground/70 hover:text-primary">
-                    Contact
-                  </NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <div className="w-56 p-4 space-y-2">
-                      <button
-                        onClick={onConsultationClick}
-                        className="block text-sm text-foreground/70 hover:text-primary py-2 w-full text-left"
-                      >
-                        Schedule Consultation
-                      </button>
-                      <Link href="/contact" className="block text-sm text-foreground/70 hover:text-primary py-2">
-                        Office Information
-                      </Link>
-                      <a href="mailto:hello@aolegal.com" className="block text-sm text-foreground/70 hover:text-primary py-2">
-                        Send Email
-                      </a>
-                    </div>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
+                <NavDropdown label="Contact">
+                  <button
+                    onClick={onConsultationClick}
+                    className="w-full text-left text-sm text-foreground/70 hover:text-primary transition-colors py-2"
+                  >
+                    Schedule Consultation
+                  </button>
+                  <NavItem href="/contact">Office Information</NavItem>
+                  <a
+                    href="mailto:hello@aolegal.com"
+                    className="block text-sm text-foreground/70 hover:text-primary py-2"
+                  >
+                    Send Email
+                  </a>
+                </NavDropdown>
               </NavigationMenuList>
             </NavigationMenu>
 
@@ -156,45 +117,46 @@ export function Navbar({ onConsultationClick }: NavbarProps) {
             {mounted && (
               <button
                 onClick={toggleTheme}
-                className="ml-4 p-2 rounded-lg hover:bg-muted transition-colors"
                 aria-label="Toggle theme"
+                className="rounded-lg p-2 hover:bg-muted transition-colors"
               >
                 {theme === 'dark' ? (
-                  <Sun size={20} className="text-accent" />
+                  <Sun className="h-5 w-5 text-accent" />
                 ) : (
-                  <Moon size={20} className="text-accent" />
+                  <Moon className="h-5 w-5 text-accent" />
                 )}
               </button>
             )}
 
-            {/* CTA Button */}
+            {/* CTA */}
             <Button
               onClick={onConsultationClick}
-              className="ml-4 bg-primary hover:bg-primary/90 text-primary-foreground text-sm font-medium px-6 py-2"
+              className="bg-primary text-primary-foreground hover:bg-primary/90 px-6"
             >
               Schedule Consultation
             </Button>
           </div>
 
-          {/* Mobile Menu Button and Theme Toggle */}
+          {/* Mobile Controls */}
           <div className="md:hidden flex items-center gap-2">
             {mounted && (
               <button
                 onClick={toggleTheme}
-                className="p-2 rounded-lg hover:bg-muted transition-colors"
                 aria-label="Toggle theme"
+                className="p-2 rounded-lg hover:bg-muted"
               >
                 {theme === 'dark' ? (
-                  <Sun size={20} className="text-accent" />
+                  <Sun className="h-5 w-5 text-accent" />
                 ) : (
-                  <Moon size={20} className="text-accent" />
+                  <Moon className="h-5 w-5 text-accent" />
                 )}
               </button>
             )}
+
             <button
-              className="p-2"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label="Toggle mobile menu"
+              aria-label="Toggle menu"
+              className="p-2"
             >
               {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -203,50 +165,41 @@ export function Navbar({ onConsultationClick }: NavbarProps) {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden pb-6 space-y-4 animate-in fade-in duration-200">
-            <Link href="/" className="block text-sm font-light text-foreground/70 hover:text-primary py-2" onClick={() => setMobileMenuOpen(false)}>
+          <div className="md:hidden pb-6 pt-4 space-y-6 animate-in fade-in slide-in-from-top-2">
+            <MobileLink href="/" onClick={setMobileMenuOpen}>
               Home
-            </Link>
-            
-            <div>
-              <div className="text-sm font-light text-foreground/70 py-2 mb-2">About</div>
-              <div className="space-y-2 pl-4 border-l border-border/30">
-                <Link href="/about/mission" className="block text-sm text-foreground/70 hover:text-primary py-1" onClick={() => setMobileMenuOpen(false)}>
-                  Our Mission & Vision
-                </Link>
-                <Link href="/about/history" className="block text-sm text-foreground/70 hover:text-primary py-1" onClick={() => setMobileMenuOpen(false)}>
-                  History & Values
-                </Link>
-                <Link href="/team" className="block text-sm text-foreground/70 hover:text-primary py-1" onClick={() => setMobileMenuOpen(false)}>
-                  Leadership Team
-                </Link>
-              </div>
-            </div>
+            </MobileLink>
 
-            <div>
-              <div className="text-sm font-light text-foreground/70 py-2 mb-2">Practice Areas</div>
-              <div className="space-y-2 pl-4 border-l border-border/30">
-                <Link href="/practice/corporate" className="block text-sm text-foreground/70 hover:text-primary py-1" onClick={() => setMobileMenuOpen(false)}>
-                  Corporate & Commercial Law
-                </Link>
-                <Link href="/practice/real-estate" className="block text-sm text-foreground/70 hover:text-primary py-1" onClick={() => setMobileMenuOpen(false)}>
-                  Real Estate & Property Law
-                </Link>
-                <Link href="/practice/litigation" className="block text-sm text-foreground/70 hover:text-primary py-1" onClick={() => setMobileMenuOpen(false)}>
-                  Litigation & Dispute Resolution
-                </Link>
-                <Link href="/practice/advisory" className="block text-sm text-foreground/70 hover:text-primary py-1" onClick={() => setMobileMenuOpen(false)}>
-                  Legal Advisory & Secretarial
-                </Link>
-              </div>
-            </div>
+            <MobileGroup title="About">
+              <MobileLink href="/about/mission" onClick={setMobileMenuOpen}>
+                Mission & Vision
+              </MobileLink>
+              <MobileLink href="/about/history" onClick={setMobileMenuOpen}>
+                History & Values
+              </MobileLink>
+              <MobileLink href="/team" onClick={setMobileMenuOpen}>
+                Leadership Team
+              </MobileLink>
+            </MobileGroup>
+
+            <MobileGroup title="Practice Areas">
+              <MobileLink href="/practice/corporate" onClick={setMobileMenuOpen}>
+                Corporate & Commercial Law
+              </MobileLink>
+              <MobileLink href="/practice/real-estate" onClick={setMobileMenuOpen}>
+                Real Estate & Property Law
+              </MobileLink>
+              <MobileLink href="/practice/litigation" onClick={setMobileMenuOpen}>
+                Litigation & Dispute Resolution
+              </MobileLink>
+            </MobileGroup>
 
             <Button
               onClick={() => {
                 setMobileMenuOpen(false)
                 onConsultationClick()
               }}
-              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground text-sm font-medium"
+              className="w-full bg-primary text-primary-foreground"
             >
               Schedule Consultation
             </Button>
@@ -255,8 +208,70 @@ export function Navbar({ onConsultationClick }: NavbarProps) {
       </div>
     </nav>
   )
+}
 
-  function toggleTheme() {
-    setTheme(theme === 'dark' ? 'light' : 'dark')
-  }
+/* ---------------- helpers ---------------- */
+
+function NavLink({ href, children }: any) {
+  return (
+    <NavigationMenuItem>
+      <Link
+        href={href}
+        className="px-3 py-2 text-sm font-light text-foreground/70 hover:text-primary transition-colors"
+      >
+        {children}
+      </Link>
+    </NavigationMenuItem>
+  )
+}
+
+function NavDropdown({ label, children, wide }: any) {
+  return (
+    <NavigationMenuItem>
+      <NavigationMenuTrigger className="text-sm font-light text-foreground/70 hover:text-primary">
+        {label}
+      </NavigationMenuTrigger>
+      <NavigationMenuContent>
+        <div className={cn('p-4 space-y-2', wide ? 'w-64' : 'w-48')}>
+          {children}
+        </div>
+      </NavigationMenuContent>
+    </NavigationMenuItem>
+  )
+}
+
+function NavItem({ href, children }: any) {
+  return (
+    <Link
+      href={href}
+      className="block text-sm text-foreground/70 hover:text-primary py-2 transition-colors"
+    >
+      {children}
+    </Link>
+  )
+}
+
+function MobileGroup({ title, children }: any) {
+  return (
+    <div>
+      <div className="text-xs uppercase tracking-wide text-muted-foreground mb-2">
+        {title}
+      </div>
+      <div className="space-y-2 border-l border-border/40 pl-4">
+        {children}
+      </div>
+    </div>
+  )
+}
+
+function MobileLink({ href, onClick, children }: any) {
+  return (
+    <Link
+      href={href}
+      onClick={() => onClick(false)}
+      className="block text-sm text-foreground/80 hover:text-primary transition-colors"
+    >
+      {children}
+    </Link>
+  )
 }

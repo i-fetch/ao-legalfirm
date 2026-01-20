@@ -64,7 +64,7 @@ export default function PublicationsPage() {
         <Hero
                 title="Legal Publications"
                 subtitle="Professional guides, whitepapers, and resources from our expert team"
-                image="/hero-section.jpg"
+                image="/hero-section5.jpg"
             >
             </Hero>
 

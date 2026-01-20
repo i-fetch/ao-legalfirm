@@ -54,9 +54,8 @@ export default function CorporateLawPage() {
             <Hero
                 title="Trusted Legal Solutions"
                 subtitle="Professional counsel with proven results"
-                image="/hero-section.jpg"
+                image="/hero-section2.jpg"
             >
-                <Button>Book Consultation</Button>
             </Hero>
 
 

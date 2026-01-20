@@ -55,7 +55,7 @@ export default function AdvisoryPage() {
         <Hero
                 title="Legal Advisory & Secretarial Services"
                 subtitle="Strategic counsel and corporate support for your business"
-                image="/hero-section.jpg"
+                image="/hero-section4.jpg"
             >
             </Hero>
       
