@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { Menu, X, Moon, Sun, ChevronRight } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import {
   NavigationMenu,
@@ -57,11 +58,16 @@ export function Navbar({ onConsultationClick }: NavbarProps) {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-20 items-center justify-between">
           {/* Logo */}
-          <Link
-            href="/"
-            className="text-xl font-serif font-bold tracking-tight text-primary"
-          >
-            AO LEGAL
+          <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+            <Image
+              src="/logo_m.png"
+              alt="AO LEGAL"
+              width={40}
+              height={40}
+              className="h-10 w-auto"
+              priority
+            />
+            
           </Link>
 
           {/* Desktop Navigation */}

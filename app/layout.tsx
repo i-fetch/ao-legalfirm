@@ -18,15 +18,15 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: 'AO LEGAL | Strategic Legal Solutions for Modern Businesses',
   description: 'Premium commercial law firm in Lagos. Corporate, real estate, litigation, and advisory services for businesses, startups, and high-net-worth individuals.',
-  generator: 'v0.app',
+  
   icons: {
     icon: [
       {
-        url: '/icon-light-32x32.png',
+        url: '/logo_m.png',
         media: '(prefers-color-scheme: light)',
       },
       {
-        url: '/icon-dark-32x32.png',
+        url: '/logo_m.png',
         media: '(prefers-color-scheme: dark)',
       },
       {
