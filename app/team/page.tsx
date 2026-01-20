@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import { ConsultationModal } from '@/components/consultation-modal'
+import { Hero } from '@/components/hero'
 import { ArrowRight, Linkedin, Mail } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -97,23 +98,12 @@ export default function TeamPage() {
     <>
       <Navbar onConsultationClick={() => setConsultationOpen(true)} />
       
-      {/* Hero Section */}
-      <section className="pt-20 pb-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-primary/5 via-background to-background">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h1 className="text-4xl md:text-5xl font-serif font-bold text-foreground mb-6">
-              Our Team
-            </h1>
-            <p className="text-lg text-foreground/70">
-              Experienced legal professionals dedicated to your success.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <Hero
+        title="Our Team"
+        subtitle="Experienced legal professionals dedicated to your success"
+        backgroundImage="linear-gradient(135deg, rgba(139, 92, 246, 0.3) 0%, rgba(59, 130, 246, 0.3) 100%)"
+        height="large"
+      />
 
       {/* Team Section */}
       <section className="py-16 px-4 sm:px-6 lg:px-8">

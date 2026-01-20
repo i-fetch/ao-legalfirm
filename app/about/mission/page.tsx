@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import { ConsultationModal } from '@/components/consultation-modal'
+import { Hero } from '@/components/hero'
 import { ArrowRight, CheckCircle2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -35,23 +36,12 @@ export default function MissionPage() {
     <>
       <Navbar onConsultationClick={() => setConsultationOpen(true)} />
       
-      {/* Hero Section */}
-      <section className="pt-20 pb-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-primary/5 via-background to-background">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h1 className="text-4xl md:text-5xl font-serif font-bold text-foreground mb-6">
-              Our Mission & Vision
-            </h1>
-            <p className="text-lg text-foreground/70 mb-8">
-              Delivering strategic legal excellence that empowers businesses and protects individual interests.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <Hero
+        title="Our Mission & Vision"
+        subtitle="Delivering strategic legal excellence that empowers businesses and protects individual interests"
+        backgroundImage="linear-gradient(135deg, rgba(59, 130, 246, 0.3) 0%, rgba(139, 92, 246, 0.3) 100%)"
+        height="large"
+      />
 
       {/* Mission & Vision */}
       <section className="py-16 px-4 sm:px-6 lg:px-8">

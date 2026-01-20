@@ -8,9 +8,14 @@ export function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="bg-muted/40 border-t border-border/30">
+    <footer className="bg-muted/40 border-t border-border/30"
+
+    >
+
+
       {/* Main Footer Content */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           {/* Brand Section */}
           <div className="space-y-4">
@@ -92,18 +97,24 @@ export function Footer() {
               <li className="flex gap-3 text-sm text-foreground/60">
                 <Phone size={16} className="text-primary flex-shrink-0 mt-0.5" />
                 <a href="tel:+2341234567890" className="hover:text-primary transition-colors">
-                  +234 (0) 123 456 7890
+                +234 127 076 93
+
                 </a>
               </li>
               <li className="flex gap-3 text-sm text-foreground/60">
                 <Mail size={16} className="text-primary flex-shrink-0 mt-0.5" />
-                <a href="mailto:hello@aolegal.com" className="hover:text-primary transition-colors">
-                  hello@aolegal.com
+                <a href="mailto:info@aolegal.net" className="hover:text-primary transition-colors">
+                  info@aolegal.net
+
                 </a>
               </li>
               <li className="flex gap-3 text-sm text-foreground/60">
                 <MapPin size={16} className="text-primary flex-shrink-0 mt-0.5" />
-                <span>Lagos, Nigeria</span>
+                <span>55E, Adebisi Omotola Close
+                  Off Samuel Adedoyin Street
+                  Behind Zenith Heights
+                  Victoria Island,
+                  Lagos, Nigeria.</span>
               </li>
             </ul>
           </div>

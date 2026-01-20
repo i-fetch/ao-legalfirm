@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import { ConsultationModal } from '@/components/consultation-modal'
+import { Hero } from '@/components/hero'
 import { ArrowRight, BookOpen, FileText, TrendingUp } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -82,23 +83,12 @@ export default function ResourcesPage() {
     <>
       <Navbar onConsultationClick={() => setConsultationOpen(true)} />
       
-      {/* Hero Section */}
-      <section className="pt-20 pb-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-primary/5 via-background to-background">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h1 className="text-4xl md:text-5xl font-serif font-bold text-foreground mb-6">
-              Resources & Insights
-            </h1>
-            <p className="text-lg text-foreground/70">
-              Stay informed with our latest legal insights, publications, and case studies.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <Hero
+        title="Resources & Insights"
+        subtitle="Stay informed with our latest legal insights, publications, and case studies"
+        backgroundImage="linear-gradient(135deg, rgba(16, 185, 129, 0.3) 0%, rgba(59, 130, 246, 0.3) 100%)"
+        height="large"
+      />
 
       {/* Resources */}
       <section className="py-16 px-4 sm:px-6 lg:px-8">
