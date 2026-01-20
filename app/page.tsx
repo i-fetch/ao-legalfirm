@@ -90,94 +90,94 @@ export default function Home() {
       <ConsultationModal open={consultationOpen} onOpenChange={setConsultationOpen} />
 
       {/* Hero Section */}
-      <section className="relative min-h-screen overflow-hidden flex items-center justify-center">
-        {/* Hero Image with parallax */}
-        <motion.img
-          src="/hero-section2.jpg"
-          alt="Hero Background"
-          style={{ y: heroY, scale: heroScale }}
-          className="absolute top-0 left-0 w-full h-full object-cover"
-        />
+<section className="relative min-h-screen overflow-hidden flex items-center justify-center">
+  {/* Hero Image with parallax */}
+  <motion.img
+    src="/hero-section.jpg" 
+    alt="Hero Background"
+    style={{ y: heroY, scale: heroScale }}
+    className="absolute top-0 left-0 w-full h-full object-cover"
+  />
 
-        {/* Overlay for readability */}
-        <motion.div
-          style={{ opacity: overlayOpacity }}
-          className="absolute inset-0 bg-black/40"
-        />
+  {/* Overlay for readability */}
+  <motion.div
+    style={{ opacity: overlayOpacity }}
+    className="absolute inset-0 bg-black/40"
+  />
 
-        {/* Floating decorative elements */}
-        <motion.div
-          style={{ y: floatingY1 }}
-          className="absolute top-20 left-20 w-72 h-72 bg-primary/10 rounded-full blur-3xl"
-        />
-        <motion.div
-          style={{ y: floatingY2 }}
-          className="absolute bottom-20 right-20 w-96 h-96 bg-accent/10 rounded-full blur-3xl"
-        />
+  {/* Floating decorative elements */}
+  <motion.div
+    style={{ y: floatingY1 }}
+    className="absolute top-20 left-20 w-72 h-72 bg-primary/10 rounded-full blur-3xl"
+  />
+  <motion.div
+    style={{ y: floatingY2 }}
+    className="absolute bottom-20 right-20 w-96 h-96 bg-accent/10 rounded-full blur-3xl"
+  />
 
-        {/* Hero content */}
-        <div className="relative z-10 flex flex-col justify-center items-center text-center px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-            className="mb-8"
-          >
-            <span className="inline-block px-6 py-2 rounded-full bg-accent/10 border border-accent/30 text-accent text-sm font-light tracking-wide">
-              Premium Legal Services
-            </span>
-          </motion.div>
+  {/* Hero content */}
+  <div className="relative z-10 flex flex-col justify-center items-center text-center px-4 sm:px-6 lg:px-8">
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1 }}
+      className="mb-8"
+    >
+      <span className="inline-block px-6 py-2 rounded-full bg-accent/10 border border-accent/30 text-accent text-sm font-light tracking-wide">
+        Premium Legal Services
+      </span>
+    </motion.div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.2 }}
-            className="text-6xl md:text-7xl lg:text-8xl font-serif font-bold text-white leading-tight"
-          >
-            Welcome to <br />
-            <motion.span
-              className="bg-gradient-to-r from-accent via-primary to-accent bg-clip-text text-transparent"
-              animate={{ backgroundPosition: ['0% center', '100% center', '0% center'] }}
-              transition={{ duration: 3, repeat: Infinity }}
-            >
-              AO Legal
-            </motion.span>
-          </motion.h1>
+    <motion.h1
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1, delay: 0.2 }}
+      className="text-6xl md:text-7xl lg:text-8xl font-serif font-bold text-white leading-tight"
+    >
+      Welcome to <br />
+      <motion.span
+        className="bg-gradient-to-r from-accent via-primary to-accent bg-clip-text text-transparent"
+        animate={{ backgroundPosition: ['0% center', '100% center', '0% center'] }}
+        transition={{ duration: 3, repeat: Infinity }}
+      >
+        AO Legal
+      </motion.span>
+    </motion.h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, delay: 0.4 }}
-            className="text-xl md:text-2xl text-white/70 mt-8 max-w-3xl font-light leading-relaxed"
-          >
-            Expert legal guidance for corporations, real estate investors, and high-net-worth individuals seeking strategic counsel
-          </motion.p>
+    <motion.p
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1.2, delay: 0.4 }}
+      className="text-xl md:text-2xl text-white/70 mt-8 max-w-3xl font-light leading-relaxed"
+    >
+      Expert legal guidance for corporations, real estate investors, and high-net-worth individuals seeking strategic counsel
+    </motion.p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-6 justify-center items-center mt-12"
-          >
-            <Button
-              size="lg"
-              onClick={() => setConsultationOpen(true)}
-              className="bg-gradient-to-r from-accent to-accent/80 hover:from-accent/90 hover:to-accent/70 text-accent-foreground px-10 py-6 text-base font-medium shadow-lg shadow-accent/20"
-            >
-              Schedule Consultation
-              <ArrowRight className="ml-2" size={18} />
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              onClick={() => document.getElementById('mission')?.scrollIntoView({ behavior: 'smooth' })}
-              className="border border-white/20 text-black hover:border-white/50 hover:bg-white/5 px-10 py-6 text-base font-medium backdrop-blur-sm"
-            >
-              Explore Our Mission
-            </Button>
-          </motion.div>
-        </div>
-      </section>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1, delay: 0.6 }}
+      className="flex flex-col sm:flex-row gap-6 justify-center items-center mt-12"
+    >
+      <Button
+        size="lg"
+        onClick={() => setConsultationOpen(true)}
+        className="bg-gradient-to-r from-accent to-accent/80 hover:from-accent/90 hover:to-accent/70 text-accent-foreground px-10 py-6 text-base font-medium shadow-lg shadow-accent/20"
+      >
+        Schedule Consultation
+        <ArrowRight className="ml-2" size={18} />
+      </Button>
+      <Button
+        size="lg"
+        variant="outline"
+        onClick={() => document.getElementById('mission')?.scrollIntoView({ behavior: 'smooth' })}
+        className="border border-white/20 text-white hover:border-white/50 hover:bg-white/5 px-10 py-6 text-base font-medium backdrop-blur-sm"
+      >
+        Explore Our Mission
+      </Button>
+    </motion.div>
+  </div>
+</section>
 
       {/* Mission Section */}
       <section id="mission" className="relative py-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
