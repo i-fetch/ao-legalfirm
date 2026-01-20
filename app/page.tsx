@@ -171,7 +171,7 @@ export default function Home() {
               size="lg"
               variant="outline"
               onClick={() => document.getElementById('mission')?.scrollIntoView({ behavior: 'smooth' })}
-              className="border border-white/20 text-white hover:border-white/50 hover:bg-white/5 px-10 py-6 text-base font-medium backdrop-blur-sm"
+              className="border border-white/20 text-black hover:border-white/50 hover:bg-white/5 px-10 py-6 text-base font-medium backdrop-blur-sm"
             >
               Explore Our Mission
             </Button>
