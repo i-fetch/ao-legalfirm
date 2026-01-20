@@ -37,11 +37,11 @@ export default function MissionPage() {
       <Navbar onConsultationClick={() => setConsultationOpen(true)} />
       
       <Hero
-        title="Our Mission & Vision"
-        subtitle="Delivering strategic legal excellence that empowers businesses and protects individual interests"
-        backgroundImage="linear-gradient(135deg, rgba(59, 130, 246, 0.3) 0%, rgba(139, 92, 246, 0.3) 100%)"
-        height="large"
-      />
+                title="About AO Legal"
+                subtitle="Professional counsel with proven results"
+                image="/hero-section5.jpg"
+            >
+            </Hero>
 
       {/* Mission & Vision */}
       <section className="py-16 px-4 sm:px-6 lg:px-8">

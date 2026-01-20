@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Menu, X, Moon, Sun } from 'lucide-react'
+import { Menu, X, Moon, Sun, ChevronRight } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
@@ -20,6 +20,7 @@ interface NavbarProps {
 
 export function Navbar({ onConsultationClick }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [mobileSubmenu, setMobileSubmenu] = useState<string | null>(null)
   const [mounted, setMounted] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const { theme, setTheme } = useTheme()
@@ -37,6 +38,11 @@ export function Navbar({ onConsultationClick }: NavbarProps) {
 
   const toggleTheme = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark')
+  }
+
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false)
+    setMobileSubmenu(null)
   }
 
   return (
@@ -98,14 +104,14 @@ export function Navbar({ onConsultationClick }: NavbarProps) {
                 <NavDropdown label="Contact">
                   <button
                     onClick={onConsultationClick}
-                    className="w-full text-left text-sm text-foreground/70 hover:text-primary transition-colors py-2"
+                    className="w-full text-left text-sm text-foreground/70 hover:text-primary transition-colors py-2 px-2 rounded hover:bg-muted/50"
                   >
                     Schedule Consultation
                   </button>
                   <NavItem href="/contact">Office Information</NavItem>
                   <a
                     href="mailto:hello@aolegal.com"
-                    className="block text-sm text-foreground/70 hover:text-primary py-2"
+                    className="block text-sm text-foreground/70 hover:text-primary py-2 px-2 rounded hover:bg-muted/50 transition-colors"
                   >
                     Send Email
                   </a>
@@ -165,44 +171,83 @@ export function Navbar({ onConsultationClick }: NavbarProps) {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden pb-6 pt-4 space-y-6 animate-in fade-in slide-in-from-top-2">
-            <MobileLink href="/" onClick={setMobileMenuOpen}>
+          <div className="md:hidden pb-6 pt-4 space-y-2 animate-in fade-in slide-in-from-top-2 max-h-[calc(100vh-80px)] overflow-y-auto">
+            <MobileLink href="/" onClick={closeMobileMenu}>
               Home
             </MobileLink>
 
-            <MobileGroup title="About">
-              <MobileLink href="/about/mission" onClick={setMobileMenuOpen}>
+            <MobileGroupMenu title="About" submenu="about" onSubmenuChange={setMobileSubmenu} currentSubmenu={mobileSubmenu}>
+              <MobileLink href="/about/mission" onClick={closeMobileMenu}>
                 Mission & Vision
               </MobileLink>
-              <MobileLink href="/about/history" onClick={setMobileMenuOpen}>
+              <MobileLink href="/about/history" onClick={closeMobileMenu}>
                 History & Values
               </MobileLink>
-              <MobileLink href="/team" onClick={setMobileMenuOpen}>
+              <MobileLink href="/team" onClick={closeMobileMenu}>
                 Leadership Team
               </MobileLink>
-            </MobileGroup>
+            </MobileGroupMenu>
 
-            <MobileGroup title="Practice Areas">
-              <MobileLink href="/practice/corporate" onClick={setMobileMenuOpen}>
+            <MobileGroupMenu title="Practice Areas" submenu="practice" onSubmenuChange={setMobileSubmenu} currentSubmenu={mobileSubmenu}>
+              <MobileLink href="/practice/corporate" onClick={closeMobileMenu}>
                 Corporate & Commercial Law
               </MobileLink>
-              <MobileLink href="/practice/real-estate" onClick={setMobileMenuOpen}>
+              <MobileLink href="/practice/real-estate" onClick={closeMobileMenu}>
                 Real Estate & Property Law
               </MobileLink>
-              <MobileLink href="/practice/litigation" onClick={setMobileMenuOpen}>
+              <MobileLink href="/practice/litigation" onClick={closeMobileMenu}>
                 Litigation & Dispute Resolution
               </MobileLink>
-            </MobileGroup>
+              <MobileLink href="/practice/advisory" onClick={closeMobileMenu}>
+                Legal Advisory & Secretarial
+              </MobileLink>
+            </MobileGroupMenu>
 
-            <Button
-              onClick={() => {
-                setMobileMenuOpen(false)
-                onConsultationClick()
-              }}
-              className="w-full bg-primary text-primary-foreground"
-            >
-              Schedule Consultation
-            </Button>
+            <MobileGroupMenu title="Resources" submenu="resources" onSubmenuChange={setMobileSubmenu} currentSubmenu={mobileSubmenu}>
+              <MobileLink href="/resources/blog" onClick={closeMobileMenu}>
+                Blog & Insights
+              </MobileLink>
+              <MobileLink href="/resources/publications" onClick={closeMobileMenu}>
+                Legal Publications
+              </MobileLink>
+              <MobileLink href="/resources/case-studies" onClick={closeMobileMenu}>
+                Case Studies
+              </MobileLink>
+            </MobileGroupMenu>
+
+            <MobileGroupMenu title="Contact" submenu="contact" onSubmenuChange={setMobileSubmenu} currentSubmenu={mobileSubmenu}>
+              <button
+                onClick={() => {
+                  closeMobileMenu()
+                  onConsultationClick()
+                }}
+                className="w-full text-left text-sm text-foreground/80 hover:text-primary py-2 px-4 rounded hover:bg-muted transition-colors"
+              >
+                Schedule Consultation
+              </button>
+              <MobileLink href="/contact" onClick={closeMobileMenu}>
+                Office Information
+              </MobileLink>
+              <a
+                href="mailto:hello@aolegal.com"
+                onClick={closeMobileMenu}
+                className="block text-sm text-foreground/80 hover:text-primary py-2 px-4 rounded hover:bg-muted transition-colors"
+              >
+                Send Email
+              </a>
+            </MobileGroupMenu>
+
+            <div className="pt-4 border-t border-border/40">
+              <Button
+                onClick={() => {
+                  closeMobileMenu()
+                  onConsultationClick()
+                }}
+                className="w-full bg-primary text-primary-foreground"
+              >
+                Schedule Consultation
+              </Button>
+            </div>
           </div>
         )}
       </div>
@@ -228,11 +273,14 @@ function NavLink({ href, children }: any) {
 function NavDropdown({ label, children, wide }: any) {
   return (
     <NavigationMenuItem>
-      <NavigationMenuTrigger className="text-sm font-light text-foreground/70 hover:text-primary">
+      <NavigationMenuTrigger className="text-sm font-light text-foreground/70 hover:text-primary data-[state=open]:text-primary">
         {label}
       </NavigationMenuTrigger>
       <NavigationMenuContent>
-        <div className={cn('p-4 space-y-2', wide ? 'w-64' : 'w-48')}>
+        <div className={cn(
+          'p-4 space-y-1 bg-background border border-border rounded-lg shadow-xl backdrop-blur-sm',
+          wide ? 'w-72' : 'w-56'
+        )}>
           {children}
         </div>
       </NavigationMenuContent>
@@ -244,22 +292,37 @@ function NavItem({ href, children }: any) {
   return (
     <Link
       href={href}
-      className="block text-sm text-foreground/70 hover:text-primary py-2 transition-colors"
+      className="block text-sm font-light text-foreground py-3 px-3 rounded-md hover:bg-muted hover:text-foreground transition-all duration-200"
     >
       {children}
     </Link>
   )
 }
 
-function MobileGroup({ title, children }: any) {
+function MobileGroupMenu({ title, submenu, onSubmenuChange, currentSubmenu, children }: any) {
+  const isOpen = currentSubmenu === submenu
+
   return (
-    <div>
-      <div className="text-xs uppercase tracking-wide text-muted-foreground mb-2">
-        {title}
-      </div>
-      <div className="space-y-2 border-l border-border/40 pl-4">
-        {children}
-      </div>
+    <div className="space-y-1">
+      <button
+        onClick={() => onSubmenuChange(isOpen ? null : submenu)}
+        className="flex items-center justify-between w-full px-4 py-2.5 text-sm font-medium text-foreground/80 hover:text-primary hover:bg-muted/50 rounded transition-colors"
+      >
+        <span>{title}</span>
+        <ChevronRight
+          size={18}
+          className={cn(
+            'transition-transform duration-200',
+            isOpen && 'rotate-90'
+          )}
+        />
+      </button>
+
+      {isOpen && (
+        <div className="pl-4 space-y-1 border-l-2 border-primary/30 animate-in slide-in-from-top-2">
+          {children}
+        </div>
+      )}
     </div>
   )
 }
@@ -268,8 +331,8 @@ function MobileLink({ href, onClick, children }: any) {
   return (
     <Link
       href={href}
-      onClick={() => onClick(false)}
-      className="block text-sm text-foreground/80 hover:text-primary transition-colors"
+      onClick={() => onClick()}
+      className="block text-sm text-foreground/80 hover:text-primary py-2 px-4 rounded hover:bg-muted transition-colors"
     >
       {children}
     </Link>

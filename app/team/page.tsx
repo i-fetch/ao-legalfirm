@@ -97,13 +97,13 @@ export default function TeamPage() {
   return (
     <>
       <Navbar onConsultationClick={() => setConsultationOpen(true)} />
-      
       <Hero
-        title="Our Team"
-        subtitle="Experienced legal professionals dedicated to your success"
-        backgroundImage="linear-gradient(135deg, rgba(139, 92, 246, 0.3) 0%, rgba(59, 130, 246, 0.3) 100%)"
-        height="large"
-      />
+                      title="Our Team"
+                      subtitle="Experienced legal professionals dedicated to your success"
+                      image="/hero-section5.jpg"
+                  >
+                  </Hero>
+      
 
       {/* Team Section */}
       <section className="py-16 px-4 sm:px-6 lg:px-8">

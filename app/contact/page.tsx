@@ -37,12 +37,12 @@ export default function ContactPage() {
     {
       icon: MapPin,
       title: 'Address',
-      details: 'Lagos, Nigeria'
+      details: '55E, Adebisi Omotola Close Off Ajose Adeogun Street Behind Zenith Heights Victoria Island, Lagos, Nigeria'
     },
     {
       icon: Phone,
       title: 'Phone',
-      details: '+234 (0) 123 456 7890'
+      details: '+234 127 076 93'
     },
     {
       icon: Mail,

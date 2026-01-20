@@ -19,7 +19,7 @@ export default function AboutPage() {
             <Hero
                 title="About AO Legal"
                 subtitle="Professional counsel with proven results"
-                image="/hero-section.jpg"
+                image="/hero-section2.jpg"
             >
             </Hero>
 
