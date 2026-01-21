@@ -97,7 +97,7 @@ export function Navbar({ onConsultationClick }: NavbarProps) {
                 </NavDropdown>
 
                 <NavDropdown label="Resources">
-                  <NavItem href="/resources/blog">Blog & Insights</NavItem>
+                  {/* <NavItem href="/resources/blog">Blog & Insights</NavItem> */}
                   <NavItem href="/resources/publications">
                     Legal Publications
                   </NavItem>
@@ -209,9 +209,9 @@ export function Navbar({ onConsultationClick }: NavbarProps) {
             </MobileGroupMenu>
 
             <MobileGroupMenu title="Resources" submenu="resources" onSubmenuChange={setMobileSubmenu} currentSubmenu={mobileSubmenu}>
-              <MobileLink href="/resources/blog" onClick={closeMobileMenu}>
+              {/* <MobileLink href="/resources/blog" onClick={closeMobileMenu}>
                 Blog & Insights
-              </MobileLink>
+              </MobileLink> */}
               <MobileLink href="/resources/publications" onClick={closeMobileMenu}>
                 Legal Publications
               </MobileLink>
