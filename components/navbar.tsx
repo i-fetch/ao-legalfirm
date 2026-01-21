@@ -51,14 +51,14 @@ export function Navbar({ onConsultationClick }: NavbarProps) {
       className={cn(
         'sticky top-0 z-50 transition-all duration-300',
         scrolled
-          ? 'bg-background/90 backdrop-blur-md shadow-sm border-b border-border/40'
-          : 'bg-background'
+          ? 'backdrop-blur-lg bg-background/30 shadow-lg border-b border-primary/10'
+          : 'bg-transparent'
       )}
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-20 items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+          <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity duration-200">
             <Image
               src="/logo_m.png"
               alt="AO LEGAL"
@@ -67,13 +67,12 @@ export function Navbar({ onConsultationClick }: NavbarProps) {
               className="h-10 w-auto"
               priority
             />
-            
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-8">
             <NavigationMenu>
-              <NavigationMenuList className="gap-1">
+              <NavigationMenuList className="gap-2">
                 <NavLink href="/">Home</NavLink>
 
                 <NavDropdown label="About">
@@ -110,14 +109,14 @@ export function Navbar({ onConsultationClick }: NavbarProps) {
                 <NavDropdown label="Contact">
                   <button
                     onClick={onConsultationClick}
-                    className="w-full text-left text-sm text-foreground/70 hover:text-primary transition-colors py-2 px-2 rounded hover:bg-muted/50"
+                    className="w-full text-left text-sm text-foreground/70 hover:text-[ #395683] transition-colors py-2 px-3 rounded-lg hover:bg-primary/5"
                   >
                     Schedule Consultation
                   </button>
                   <NavItem href="/contact">Office Information</NavItem>
                   <a
                     href="mailto:hello@aolegal.com"
-                    className="block text-sm text-foreground/70 hover:text-primary py-2 px-2 rounded hover:bg-muted/50 transition-colors"
+                    className="block text-sm text-foreground/70 hover:text-primary py-2 px-3 rounded-lg hover:bg-primary/5 transition-colors"
                   >
                     Send Email
                   </a>
@@ -130,7 +129,7 @@ export function Navbar({ onConsultationClick }: NavbarProps) {
               <button
                 onClick={toggleTheme}
                 aria-label="Toggle theme"
-                className="rounded-lg p-2 hover:bg-muted transition-colors"
+                className="rounded-lg p-2.5 hover:bg-primary/10 transition-all duration-200 border border-primary/20"
               >
                 {theme === 'dark' ? (
                   <Sun className="h-5 w-5 text-accent" />
@@ -143,7 +142,7 @@ export function Navbar({ onConsultationClick }: NavbarProps) {
             {/* CTA */}
             <Button
               onClick={onConsultationClick}
-              className="bg-primary text-primary-foreground hover:bg-primary/90 px-6"
+              className="bg-gradient-to-r from-accent to-accent/80 text-accent-foreground hover:shadow-lg hover:shadow-accent/25 transition-all duration-300 px-6"
             >
               Schedule Consultation
             </Button>
@@ -155,7 +154,7 @@ export function Navbar({ onConsultationClick }: NavbarProps) {
               <button
                 onClick={toggleTheme}
                 aria-label="Toggle theme"
-                className="p-2 rounded-lg hover:bg-muted"
+                className="p-2 rounded-lg hover:bg-primary/10 transition-all duration-200"
               >
                 {theme === 'dark' ? (
                   <Sun className="h-5 w-5 text-accent" />
@@ -168,7 +167,7 @@ export function Navbar({ onConsultationClick }: NavbarProps) {
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle menu"
-              className="p-2"
+              className="p-2 hover:bg-primary/10 rounded-lg transition-all duration-200"
             >
               {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -227,7 +226,7 @@ export function Navbar({ onConsultationClick }: NavbarProps) {
                   closeMobileMenu()
                   onConsultationClick()
                 }}
-                className="w-full text-left text-sm text-foreground/80 hover:text-primary py-2 px-4 rounded hover:bg-muted transition-colors"
+                className="w-full text-left text-sm text-foreground/80 hover:text-primary py-2 px-4 rounded-lg hover:bg-primary/5 transition-colors"
               >
                 Schedule Consultation
               </button>
@@ -237,19 +236,19 @@ export function Navbar({ onConsultationClick }: NavbarProps) {
               <a
                 href="mailto:hello@aolegal.com"
                 onClick={closeMobileMenu}
-                className="block text-sm text-foreground/80 hover:text-primary py-2 px-4 rounded hover:bg-muted transition-colors"
+                className="block text-sm text-foreground/80 hover:text-primary py-2 px-4 rounded-lg hover:bg-primary/5 transition-colors"
               >
                 Send Email
               </a>
             </MobileGroupMenu>
 
-            <div className="pt-4 border-t border-border/40">
+            <div className="pt-4 border-t border-primary/10">
               <Button
                 onClick={() => {
                   closeMobileMenu()
                   onConsultationClick()
                 }}
-                className="w-full bg-primary text-primary-foreground"
+                className="w-full bg-gradient-to-r from-accent to-accent/80 text-accent-foreground"
               >
                 Schedule Consultation
               </Button>
@@ -268,7 +267,7 @@ function NavLink({ href, children }: any) {
     <NavigationMenuItem>
       <Link
         href={href}
-        className="px-3 py-2 text-sm font-light text-foreground/70 hover:text-primary transition-colors"
+        className="px-3 py-2 text-sm font-light text-foreground/70 hover:text-primary transition-colors duration-200 rounded-lg hover:bg-primary/5"
       >
         {children}
       </Link>
@@ -279,12 +278,12 @@ function NavLink({ href, children }: any) {
 function NavDropdown({ label, children, wide }: any) {
   return (
     <NavigationMenuItem>
-      <NavigationMenuTrigger className="text-sm font-light text-foreground/70 hover:text-primary data-[state=open]:text-primary">
+      <NavigationMenuTrigger className="text-sm font-light text-foreground/70 hover:text-primary data-[state=open]:text-primary rounded-lg transition-all duration-200">
         {label}
       </NavigationMenuTrigger>
       <NavigationMenuContent>
         <div className={cn(
-          'p-4 space-y-1 bg-background border border-border rounded-lg shadow-xl backdrop-blur-sm',
+          'p-4 space-y-1 bg-background/80 backdrop-blur-xl border border-primary/10 rounded-xl shadow-2xl',
           wide ? 'w-72' : 'w-56'
         )}>
           {children}
@@ -298,7 +297,7 @@ function NavItem({ href, children }: any) {
   return (
     <Link
       href={href}
-      className="block text-sm font-light text-foreground py-3 px-3 rounded-md hover:bg-muted hover:text-foreground transition-all duration-200"
+      className="block text-sm font-light text-foreground py-3 px-3 rounded-lg hover:bg-primary/5 hover:text-primary transition-all duration-200"
     >
       {children}
     </Link>
@@ -312,13 +311,13 @@ function MobileGroupMenu({ title, submenu, onSubmenuChange, currentSubmenu, chil
     <div className="space-y-1">
       <button
         onClick={() => onSubmenuChange(isOpen ? null : submenu)}
-        className="flex items-center justify-between w-full px-4 py-2.5 text-sm font-medium text-foreground/80 hover:text-primary hover:bg-muted/50 rounded transition-colors"
+        className="flex items-center justify-between w-full px-4 py-2.5 text-sm font-medium text-foreground/80 hover:text-primary hover:bg-primary/5 rounded-lg transition-all duration-200"
       >
         <span>{title}</span>
         <ChevronRight
           size={18}
           className={cn(
-            'transition-transform duration-200',
+            'transition-transform duration-300',
             isOpen && 'rotate-90'
           )}
         />
@@ -338,7 +337,7 @@ function MobileLink({ href, onClick, children }: any) {
     <Link
       href={href}
       onClick={() => onClick()}
-      className="block text-sm text-foreground/80 hover:text-primary py-2 px-4 rounded hover:bg-muted transition-colors"
+      className="block text-sm text-foreground/80 hover:text-primary py-2 px-4 rounded-lg hover:bg-primary/5 transition-all duration-200"
     >
       {children}
     </Link>

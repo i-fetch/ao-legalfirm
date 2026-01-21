@@ -86,7 +86,7 @@ export default function Home() {
   ]
 
   return (
-    <div className="min-h-screen bg-background text-foreground transition-colors duration-500">
+    <div className="min-h-screen bg-transparent text-foreground  duration-500">
       <Navbar onConsultationClick={() => setConsultationOpen(true)} />
       <ConsultationModal open={consultationOpen} onOpenChange={setConsultationOpen} />
 
